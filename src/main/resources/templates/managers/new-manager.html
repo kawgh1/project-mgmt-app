@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- thymeleaf fragment in layouts.html -->
+    <head th:replace="layouts :: head"></head>
+</head>
+<body>
+
+<!-- thymeleaf fragment in layouts.html -->
+<nav th:replace="layouts :: navbar"></nav>
+
+<div class="container">
+    <form th:object="${manager}" action="/managers/save" method="POST">
+
+        <input type="text" placeholder="First Name" th:field="${manager.firstName}">
+
+        <input type="text" placeholder="Last Name" th:field="${manager.lastName}">
+
+        <input type="text" placeholder="Email" th:field="${manager.email}">
+
+
+
+        <button type="submit">Create Project Manager</button>
+    </form>
+
+</div>
+
+<!-- thymeleaf fragment in layouts.html -->
+<footer th:replace="layouts :: footer"></footer>
+
+</body>
+
+</html>

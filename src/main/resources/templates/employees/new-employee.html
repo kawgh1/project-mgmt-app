@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- thymeleaf fragment in layouts.html -->
+    <head th:replace="layouts :: head"></head>
+</head>
+<body>
+
+<!-- thymeleaf fragment in layouts.html -->
+<nav th:replace="layouts :: navbar"></nav>
+
+<div class="container">
+    <form th:object="${employee}" action="/employees/save" method="POST">
+
+        <input type="text" placeholder="First Name" th:field="${employee.firstName}">
+
+        <input type="text" placeholder="Last Name" th:field="${employee.lastName}">
+
+        <input type="text" placeholder="Email" th:field="${employee.email}">
+
+        <input type="text" placeholder="Position" th:field="${employee.position}">
+
+
+
+        <button type="submit">Create Employee</button>
+    </form>
+
+</div>
+
+<!-- thymeleaf fragment in layouts.html -->
+<footer th:replace="layouts :: footer"></footer>
+
+</body>
+
+</html>

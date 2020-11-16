@@ -1,6 +1,12 @@
 package com.kwgdev.projectmanagement.entities;
 
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
 public class Project {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long projectId;
     private String name;
 
@@ -8,10 +14,23 @@ public class Project {
 
     private String description;
 
-    public Project(String name, String stage, String description) {
+    @OneToMany(mappedBy = "project")
+    private List<Employee> employees;
+
+    @ManyToOne
+    @JoinColumn(name = "manager_id")
+    private Manager manager;
+
+    // This empty instance is used for Thymeleaf HTML form binding
+    public Project() {
+
+    }
+
+    public Project(String name, String stage, String description, Manager manager) {
         this.name = name;
         this.stage = stage;
         this.description = description;
+        this.manager = manager;
     }
 
     public long getProjectId() {
@@ -44,5 +63,21 @@ public class Project {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Manager getManager() {
+        return manager;
+    }
+
+    public void setManager(Manager manager) {
+        this.manager = manager;
+    }
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
     }
 }

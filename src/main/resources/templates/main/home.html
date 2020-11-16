@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- thymeleaf fragment in layouts.html -->
+    <head th:replace="layouts :: head"></head>
+</head>
+<body>
+
+<!-- thymeleaf fragment in layouts.html -->
+<nav th:replace="layouts :: navbar"></nav>
+
+
+<h4>Current Projects</h4>
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>Project Name</th>
+                <th>Project Stage</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="aProject : ${projectsList}">
+                <td th:text="${aProject.name}"></td>
+                <td th:text="${aProject.stage}"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<h4>Current Locations</h4>
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th>City</th>
+            <th>State</th>
+            <th>Zip</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="aLocation : ${locationsList}">
+            <td th:text="${aLocation.city}"></td>
+            <td th:text="${aLocation.state}"></td>
+            <td th:text="${aLocation.zip}"></td>
+            <td th:text="${aLocation.active}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<h4>Managers</h4>
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="aManager : ${managersList}">
+            <td th:text="${aManager.firstName}"></td>
+            <td th:text="${aManager.lastName}"></td>
+            <td th:text="${aManager.email}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<h4>Employees</h4>
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="aEmployee : ${employeesList}">
+                <td th:text="${aEmployee.firstName}"></td>
+                <td th:text="${aEmployee.lastName}"></td>
+                <td th:text="${aEmployee.email}"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- thymeleaf fragment in layouts.html -->
+<footer th:replace="layouts :: footer"></footer>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <!-- thymeleaf fragment in layouts.html -->
+    <head th:replace="layouts :: head"></head>
+<body>
+
+<!-- thymeleaf fragment in layouts.html -->
+<nav th:replace="layouts :: navbar"></nav>
+
+<div class="container">
+    <h3>Locations Directory</h3>
+    <hr>
+
+    <!--    Add new Location Button -->
+    <a th:href="@{locations/new}" class="btn btn-primary btn-sm mb-3">New Location</a>
+
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>City</th>
+            <th>State</th>
+            <th>Zip</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="aLocation : ${locations}">
+            <td th:text="${aLocation.city}"></td>
+            <td th:text="${aLocation.state}"></td>
+            <td th:text="${aLocation.zip}"></td>
+            <td th:text="${aLocation.active}"></td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

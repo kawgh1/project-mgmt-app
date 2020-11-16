@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- thymeleaf fragment in layouts.html -->
+    <head th:replace="layouts :: head"></head>
+</head>
+<body>
+
+<!-- thymeleaf fragment in layouts.html -->
+<nav th:replace="layouts :: navbar"></nav>
+
+<div class="container">
+    <form th:object="${location}" action="/locations/save" method="POST">
+
+        <input type="text" placeholder="City" th:field="${location.city}">
+
+        <input type="text" placeholder="State" th:field="${location.state}">
+
+        <input type="text" placeholder="Zip" th:field="${location.zip}">
+
+        <select th:field="${location.active}">
+            <option th:value="FALSE"> Active </option>
+            <option th:value="TRUE"> Inactive </option>
+        </select>
+
+
+        <button type="submit">Create Location</button>
+    </form>
+
+</div>
+
+<!-- thymeleaf fragment in layouts.html -->
+<footer th:replace="layouts :: footer"></footer>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!-- thymeleaf fragment in layouts.html -->
+<head th:replace="layouts :: head"></head>
+<body>
+
+<!-- thymeleaf fragment in layouts.html -->
+<nav th:replace="layouts :: navbar"></nav>
+
+<div class="container">
+    <h3>Employees Directory</h3>
+    <hr>
+
+    <!--    Add new Employee Button -->
+    <a th:href="@{employees/new}" class="btn btn-primary btn-sm mb-3">New Employee</a>
+
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Position</th>
+            <th>Manager</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="aEmployee : ${employees}">
+            <td th:text="${aEmployee.firstName}"></td>
+            <td th:text="${aEmployee.lastName}"></td>
+            <td th:text="${aEmployee.email}"></td>
+            <td th:text="${aEmployee.position}"></td>
+            <td th:text="${aEmployee.manager}"></td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
