@@ -21,6 +21,8 @@
             <th>State</th>
             <th>Zip</th>
             <th>Status</th>
+            <th>Projects</th>
+            <th>Managers</th>
         </tr>
         </thead>
         <tbody>
@@ -29,6 +31,10 @@
             <td th:text="${aLocation.state}"></td>
             <td th:text="${aLocation.zip}"></td>
             <td th:text="${aLocation.active}"></td>
+            <td th:each = "project : ${aLocation.projects}"
+                th:text="${project.name}"></td>
+            <td th:each = "manager : ${aLocation.managers}"
+                th:text="${manager.firstName} + ' ' + ${manager.lastName}"></td>
 
         </tr>
         </tbody>

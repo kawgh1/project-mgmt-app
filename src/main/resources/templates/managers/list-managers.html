@@ -28,7 +28,8 @@
             <td th:text="${aManager.firstName}"></td>
             <td th:text="${aManager.lastName}"></td>
             <td th:text="${aManager.email}"></td>
-            <td th:text="${aManager.projects}"></td>
+            <td th:each = "project : ${aManager.projects}"
+                th:text="${project.name}"></td>
 
         </tr>
         </tbody>

@@ -15,13 +15,20 @@ public class Employee {
     private String email;
     private String position;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH},
+            fetch = FetchType.LAZY)
     @JoinColumn(name = "manager_id")
     private Manager manager;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH},
+                fetch = FetchType.LAZY)
     @JoinColumn(name = "project_id")
     private Project project;
+
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH},
+            fetch = FetchType.LAZY)
+    @JoinColumn(name = "location_id")
+    private Location location;
 
     public Employee(String firstName, String lastName, String email, String position, Manager manager) {
         this.firstName = firstName;
@@ -89,5 +96,13 @@ public class Employee {
 
     public void setManager(Manager manager) {
         this.manager = manager;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 }

@@ -23,6 +23,27 @@
             <textarea type="text" placeholder="Enter Project Description"
                       th:field="${project.description}"></textarea>
 
+            <select th:field="${project.location}">
+                <option th:each = "location : ${allLocations}"
+                        th:value = "${location.locationId}"
+                        th:text = "${location.city} + ', ' + ${location.state}">
+                </option>
+            </select>
+
+            <select th:field="${project.manager}">
+                <option th:each = "manager : ${allManagers}"
+                        th:value = "${manager.managerId}"
+                        th:text = "${manager.firstName} + ' ' +${manager.lastName}">
+                </option>
+            </select>
+
+            <select th:field="${project.employees}" multiple="multiple">
+                <option th:each = "employee : ${allEmployees}"
+                        th:value = "${employee.employeeId}"
+                        th:text = "${employee.firstName} + ' ' + ${employee.lastName}">
+                </option>
+            </select>
+
             <button type="submit">Create Project</button>
         </form>
 

@@ -20,6 +20,12 @@
 
         <input type="text" placeholder="Position" th:field="${employee.position}">
 
+        <select th:field="${employee.manager}">
+            <option th:each = "manager : ${allManagers}"
+                    th:value = "${manager.managerId}"
+                    th:text = "${manager.firstName} + ' ' + ${manager.lastName}">
+            </option>
+        </select>
 
 
         <button type="submit">Create Employee</button>

@@ -19,14 +19,23 @@
         <tr>
             <th>Project Name</th>
             <th>Project Stage</th>
+            <th>Description</th>
             <th>Project Manager</th>
+            <th>Location</th>
+<!--            no easy way to set dynamic colspan, setting to 5-->
+<!--            <th th:colspan="${aProject.employees.length}">Employees</th>-->
+            <th colspan="5" style="text-align: center;">Employees</th>
         </tr>
         </thead>
         <tbody>
             <tr th:each="aProject : ${projects}">
                 <td th:text="${aProject.name}"></td>
                 <td th:text="${aProject.stage}"></td>
-                <td th:text="${aProject.manager}"></td>
+                <td th:text="${aProject.description}"></td>
+                <td th:text="${aProject.manager.firstName} + ' ' + ${aProject.manager.lastName}"></td>
+                <td th:text="${aProject.location.city} + ' ' + ${aProject.location.state}"></td>
+                <td th:each = "employee : ${aProject.employees}"
+                    th:text="${employee.firstName} + ' ' + ${employee.lastName}"></td>
 
             </tr>
         </tbody>

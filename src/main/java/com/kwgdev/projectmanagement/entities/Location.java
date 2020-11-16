@@ -1,9 +1,7 @@
 package com.kwgdev.projectmanagement.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Location {
@@ -16,6 +14,17 @@ public class Location {
     private String state;
     private String zip;
     private boolean active;
+
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH},
+            fetch = FetchType.LAZY)
+    @JoinColumn(name = "manager_id")
+    private List<Manager> managers;
+
+    @OneToMany(mappedBy = "location")
+    private List<Employee> employees;
+
+    @OneToMany(mappedBy = "location")
+    private List<Project> projects;
 
     public Location(String city, String state, String zip, boolean active) {
         this.city = city;
@@ -66,5 +75,40 @@ public class Location {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
+    }
+
+    public List<Manager> getManagers() {
+        return managers;
+    }
+
+    public void setManagers(List<Manager> managers) {
+        this.managers = managers;
+    }
+
+    public void addManager(Manager manager) {
+        this.managers.add(manager);
+
+    }
+
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
+    }
+
+    public void addProject(Project project) {
+        this.projects.add(project);
     }
 }

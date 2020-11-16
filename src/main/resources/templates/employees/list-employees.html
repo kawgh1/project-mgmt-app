@@ -21,7 +21,9 @@
             <th>Last Name</th>
             <th>Email</th>
             <th>Position</th>
+            <th>Project</th>
             <th>Manager</th>
+            <th>Location</th>
         </tr>
         </thead>
         <tbody>
@@ -30,7 +32,10 @@
             <td th:text="${aEmployee.lastName}"></td>
             <td th:text="${aEmployee.email}"></td>
             <td th:text="${aEmployee.position}"></td>
-            <td th:text="${aEmployee.manager}"></td>
+            <td th:text="${aEmployee.project}"></td>
+            <td th:text="${aEmployee.manager.firstName} + ' ' + ${aEmployee.manager.lastName}"></td>
+            <td th:if="${aEmployee.location}" th:text="${aEmployee.location.city} + ' ' ${aEmployee.location.state}"></td>
+
 
         </tr>
         </tbody>

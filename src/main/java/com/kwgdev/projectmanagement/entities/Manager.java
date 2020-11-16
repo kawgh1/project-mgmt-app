@@ -14,12 +14,16 @@ public class Manager {
     private String lastName;
     private String email;
 
-    @OneToMany
-    @JoinColumn(name = "employeeId")
+    @OneToMany(mappedBy = "manager")
     private List<Employee> employees;
 
-    @OneToMany
+    @OneToMany(mappedBy = "manager")
     private List<Project> projects;
+
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH},
+            fetch = FetchType.LAZY)
+    @JoinColumn(name = "location_id")
+    private List<Location> locations;
 
 
     public Manager(String firstName, String lastName, String email) {
@@ -66,6 +70,8 @@ public class Manager {
 
 
 
+
+
     public List<Employee> getEmployees() {
         return employees;
     }
@@ -74,11 +80,31 @@ public class Manager {
         this.employees = employees;
     }
 
+    public void addEmployee(Employee employee) {
+        this.employees.add(employee);
+    }
+
     public List<Project> getProjects() {
         return projects;
     }
 
     public void setProjects(List<Project> projects) {
         this.projects = projects;
+    }
+
+    public void addProject(Project project) {
+        this.projects.add(project);
+    }
+
+    public List<Location> getLocations() {
+        return locations;
+    }
+
+    public void setLocations(List<Location> locations) {
+        this.locations = locations;
+    }
+
+    public void addLocation(Location location) {
+        this.locations.add(location);
     }
 }

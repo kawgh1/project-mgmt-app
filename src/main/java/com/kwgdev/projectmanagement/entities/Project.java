@@ -17,20 +17,26 @@ public class Project {
     @OneToMany(mappedBy = "project")
     private List<Employee> employees;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH},
+            fetch = FetchType.LAZY)
     @JoinColumn(name = "manager_id")
     private Manager manager;
+
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH},
+            fetch = FetchType.LAZY)
+    @JoinColumn(name = "location_id")
+    private Location location;
+
 
     // This empty instance is used for Thymeleaf HTML form binding
     public Project() {
 
     }
 
-    public Project(String name, String stage, String description, Manager manager) {
+    public Project(String name, String stage, String description) {
         this.name = name;
         this.stage = stage;
         this.description = description;
-        this.manager = manager;
     }
 
     public long getProjectId() {
@@ -79,5 +85,13 @@ public class Project {
 
     public void setEmployees(List<Employee> employees) {
         this.employees = employees;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 }
