@@ -10,86 +10,88 @@
 <nav th:replace="layouts :: navbar"></nav>
 
 
-<h4>Current Projects</h4>
-<div>
-    <table>
-        <thead>
-            <tr>
-                <th>Project Name</th>
-                <th>Project Stage</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="aProject : ${projectsList}">
-                <td th:text="${aProject.name}"></td>
-                <td th:text="${aProject.stage}"></td>
-            </tr>
-        </tbody>
-    </table>
+<!--main container div-->
+<div class="container">
+    <h3>Main Dashboard</h3>
+    <hr>
+    <h4>Current Projects</h4>
+    <div class="row">
+        <div class="col-md-6">
+
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                <tr>
+                    <th style="text-align: center;">Project Name</th>
+                    <th style="text-align: center;">Project Stage</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="aProject : ${projectsList}">
+                    <td th:text="${aProject.name}"></td>
+                    <td th:text="${aProject.stage}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <!--pie chart-->
+        <div class="col-md-4">
+            <canvas id="myPieChart" height="100" width="100"></canvas>
+        </div>
+    </div>
+    </div>
+
+<div class="container">
+
+    <h4>Managers</h4>
+    <div class="row">
+        <div class="col-md-6">
+
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                <tr>
+                    <th style="text-align: center;">First Name</th>
+                    <th style="text-align: center;">Last Name</th>
+                    <th style="text-align: center;">Email</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="aManager : ${managersList}">
+                    <td th:text="${aManager.firstName}"></td>
+                    <td th:text="${aManager.lastName}"></td>
+                    <td th:text="${aManager.email}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <h4>Employees</h4>
+    <div class="row">
+        <div class="col-md-6">
+
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                <tr>
+                    <th style="text-align: center;">First Name</th>
+                    <th style="text-align: center;">Last Name</th>
+                    <th style="text-align: center;">Project Count</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="aEmployee : ${employeesListProjectCount}">
+                    <td th:text="${aEmployee.firstName}"></td>
+                    <td th:text="${aEmployee.lastName}"></td>
+                    <td th:text="${aEmployee.projectCount}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
 </div>
 
-<h4>Current Locations</h4>
-<div>
-    <table>
-        <thead>
-        <tr>
-            <th>City</th>
-            <th>State</th>
-            <th>Zip</th>
-            <th>Status</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="aLocation : ${locationsList}">
-            <td th:text="${aLocation.city}"></td>
-            <td th:text="${aLocation.state}"></td>
-            <td th:text="${aLocation.zip}"></td>
-            <td th:text="${aLocation.active}"></td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-
-<h4>Managers</h4>
-<div>
-    <table>
-        <thead>
-        <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="aManager : ${managersList}">
-            <td th:text="${aManager.firstName}"></td>
-            <td th:text="${aManager.lastName}"></td>
-            <td th:text="${aManager.email}"></td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-
-
-<h4>Employees</h4>
-<div>
-    <table>
-        <thead>
-            <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="aEmployee : ${employeesList}">
-                <td th:text="${aEmployee.firstName}"></td>
-                <td th:text="${aEmployee.lastName}"></td>
-                <td th:text="${aEmployee.email}"></td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+<script type="text/javascript" th:src="@{js/myChart.js}"></script>
 
 <!-- thymeleaf fragment in layouts.html -->
 <footer th:replace="layouts :: footer"></footer>

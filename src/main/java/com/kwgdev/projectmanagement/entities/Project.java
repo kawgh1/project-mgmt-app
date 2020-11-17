@@ -2,6 +2,7 @@ package com.kwgdev.projectmanagement.entities;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Project {
@@ -9,23 +10,26 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long projectId;
     private String name;
+    private String location;
 
     private String stage; // NOTSTARTED, COMPLETED, INPROGRESS
 
     private String description;
 
-    @OneToMany(mappedBy = "project")
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH},
+    fetch = FetchType.LAZY)
+    @JoinTable(name = "project_employee",
+    joinColumns = @JoinColumn(name = "project_id"),
+    inverseJoinColumns = @JoinColumn(name = "employee_id"))
     private List<Employee> employees;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH},
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH},
             fetch = FetchType.LAZY)
-    @JoinColumn(name = "manager_id")
-    private Manager manager;
+    @JoinTable(name = "project_manager",
+            joinColumns = @JoinColumn(name = "project_id"),
+            inverseJoinColumns = @JoinColumn(name = "manager_id"))
+    private List<Manager> managers;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH},
-            fetch = FetchType.LAZY)
-    @JoinColumn(name = "location_id")
-    private Location location;
 
 
     // This empty instance is used for Thymeleaf HTML form binding
@@ -37,6 +41,15 @@ public class Project {
         this.name = name;
         this.stage = stage;
         this.description = description;
+    }
+
+    public Project(String name, String location, String stage, String description, List<Manager> managers, List<Employee> employees) {
+        this.name = name;
+        this.location = location;
+        this.stage = stage;
+        this.description = description;
+        this.managers = managers;
+        this.employees = employees;
     }
 
     public long getProjectId() {
@@ -71,12 +84,18 @@ public class Project {
         this.description = description;
     }
 
-    public Manager getManager() {
-        return manager;
+    public List<Manager> getManagers() {
+        return managers;
     }
 
-    public void setManager(Manager manager) {
-        this.manager = manager;
+    public void setManagers(List<Manager> managers) {
+        this.managers = managers;
+    }
+
+    public void addManager(Manager manager) {
+        if(!managers.contains(manager)) {
+            managers.add(manager);
+        }
     }
 
     public List<Employee> getEmployees() {
@@ -87,11 +106,17 @@ public class Project {
         this.employees = employees;
     }
 
-    public Location getLocation() {
+    public void addEmployee(Employee employee) {
+        if(!employees.contains(employee)) {
+            employees.add(employee);
+        }
+    }
+
+    public String getLocation() {
         return location;
     }
 
-    public void setLocation(Location location) {
+    public void setLocation(String location) {
         this.location = location;
     }
 }

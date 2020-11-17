@@ -23,12 +23,8 @@
             <textarea type="text" placeholder="Enter Project Description"
                       th:field="${project.description}"></textarea>
 
-            <select th:field="${project.location}">
-                <option th:each = "location : ${allLocations}"
-                        th:value = "${location.locationId}"
-                        th:text = "${location.city} + ', ' + ${location.state}">
-                </option>
-            </select>
+            <input type="text" placeholder="Location" th:field="${project.location}">
+
 
             <select th:field="${project.manager}">
                 <option th:each = "manager : ${allManagers}"

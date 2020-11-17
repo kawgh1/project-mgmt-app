@@ -1,6 +1,7 @@
 package com.kwgdev.projectmanagement.entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -15,20 +16,18 @@ public class Employee {
     private String email;
     private String position;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH},
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH},
             fetch = FetchType.LAZY)
     @JoinColumn(name = "manager_id")
     private Manager manager;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH},
-                fetch = FetchType.LAZY)
-    @JoinColumn(name = "project_id")
-    private Project project;
-
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH},
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH},
             fetch = FetchType.LAZY)
-    @JoinColumn(name = "location_id")
-    private Location location;
+    @JoinTable(name="project_employee",
+            joinColumns=@JoinColumn(name = "employee_id"),
+            inverseJoinColumns=@JoinColumn(name="project_id"))
+    private List<Project> projects;
+
 
     public Employee(String firstName, String lastName, String email, String position, Manager manager) {
         this.firstName = firstName;
@@ -36,6 +35,13 @@ public class Employee {
         this.email = email;
         this.position = position;
         this.manager = manager;
+    }
+
+    public Employee(String firstName, String lastName, String email, String position) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.position = position;
     }
 
     // This empty instance is used for Thymeleaf HTML form binding
@@ -82,12 +88,12 @@ public class Employee {
         this.position = position;
     }
 
-    public Project getProject() {
-        return project;
+    public List<Project> getProject() {
+        return projects;
     }
 
     public void setProject(Project project) {
-        this.project = project;
+        this.projects = projects;
     }
 
     public Manager getManager() {
@@ -98,11 +104,4 @@ public class Employee {
         this.manager = manager;
     }
 
-    public Location getLocation() {
-        return location;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
-    }
 }

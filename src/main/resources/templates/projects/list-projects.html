@@ -17,14 +17,12 @@
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
         <tr>
-            <th>Project Name</th>
-            <th>Project Stage</th>
-            <th>Description</th>
-            <th>Project Manager</th>
-            <th>Location</th>
-<!--            no easy way to set dynamic colspan, setting to 5-->
-<!--            <th th:colspan="${aProject.employees.length}">Employees</th>-->
-            <th colspan="5" style="text-align: center;">Employees</th>
+            <th style="text-align: center;">Project Name</th>
+            <th style="text-align: center;">Project Stage</th>
+            <th style="text-align: center;">Description</th>
+            <th style="text-align: center;">Project Manager</th>
+            <th style="text-align: center;">Location</th>
+
         </tr>
         </thead>
         <tbody>
@@ -32,10 +30,10 @@
                 <td th:text="${aProject.name}"></td>
                 <td th:text="${aProject.stage}"></td>
                 <td th:text="${aProject.description}"></td>
-                <td th:text="${aProject.manager.firstName} + ' ' + ${aProject.manager.lastName}"></td>
-                <td th:text="${aProject.location.city} + ' ' + ${aProject.location.state}"></td>
-                <td th:each = "employee : ${aProject.employees}"
-                    th:text="${employee.firstName} + ' ' + ${employee.lastName}"></td>
+                <td th:each="manager : ${aProject.managers}"
+                    th:text="${manager.firstName} + ' ' + ${manager.lastName} ?: 'None'"></td>
+                <td th:text="${aProject.location} ?: 'None'"></td>
+
 
             </tr>
         </tbody>

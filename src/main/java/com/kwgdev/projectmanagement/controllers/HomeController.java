@@ -1,11 +1,9 @@
 package com.kwgdev.projectmanagement.controllers;
 
 import com.kwgdev.projectmanagement.dao.EmployeeRepository;
-import com.kwgdev.projectmanagement.dao.LocationRepository;
 import com.kwgdev.projectmanagement.dao.ManagerRepository;
 import com.kwgdev.projectmanagement.dao.ProjectRepository;
-import com.kwgdev.projectmanagement.entities.Employee;
-import com.kwgdev.projectmanagement.entities.Location;
+import com.kwgdev.projectmanagement.dto.EmployeeProject;
 import com.kwgdev.projectmanagement.entities.Manager;
 import com.kwgdev.projectmanagement.entities.Project;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +20,6 @@ public class HomeController {
     ProjectRepository projectRepo;
 
     @Autowired
-    LocationRepository locationRepo;
-
-    @Autowired
     ManagerRepository managerRepo;
 
     @Autowired
@@ -37,20 +32,16 @@ public class HomeController {
 
         model.addAttribute("projectsList", projects);
 
-        // Locations
-        List<Location> locations = locationRepo.findAll();
-
-        model.addAttribute("locationsList", locations);
-
         // Managers
         List<Manager> managers = managerRepo.findAll();
 
         model.addAttribute("managersList", managers);
 
         // Employees
-        List<Employee> employees = employeeRepo.findAll();
+//        List<Employee> employees = employeeRepo.findAll();
+        List<EmployeeProject> employeesProjectCount = employeeRepo.employeeProjects();
 
-        model.addAttribute("employeesList", employees);
+        model.addAttribute("employeesListProjectCount", employeesProjectCount);
         return "main/home";
 
     }

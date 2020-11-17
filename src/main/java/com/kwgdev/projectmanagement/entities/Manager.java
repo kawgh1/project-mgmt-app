@@ -2,6 +2,7 @@ package com.kwgdev.projectmanagement.entities;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Manager {
@@ -17,13 +18,15 @@ public class Manager {
     @OneToMany(mappedBy = "manager")
     private List<Employee> employees;
 
-    @OneToMany(mappedBy = "manager")
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH},
+            fetch = FetchType.LAZY)
+    @JoinTable(name = "project_manager",
+            joinColumns = @JoinColumn(name = "manager_id"),
+            inverseJoinColumns = @JoinColumn(name = "project_id"))
     private List<Project> projects;
 
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH},
-            fetch = FetchType.LAZY)
-    @JoinColumn(name = "location_id")
-    private List<Location> locations;
+
+
 
 
     public Manager(String firstName, String lastName, String email) {
@@ -81,7 +84,10 @@ public class Manager {
     }
 
     public void addEmployee(Employee employee) {
-        this.employees.add(employee);
+        if(!this.employees.contains(employee)){
+            this.employees.add(employee);
+        }
+
     }
 
     public List<Project> getProjects() {
@@ -93,18 +99,10 @@ public class Manager {
     }
 
     public void addProject(Project project) {
-        this.projects.add(project);
+        if (!this.projects.contains(project)){
+            this.projects.add(project);
+        }
+
     }
 
-    public List<Location> getLocations() {
-        return locations;
-    }
-
-    public void setLocations(List<Location> locations) {
-        this.locations = locations;
-    }
-
-    public void addLocation(Location location) {
-        this.locations.add(location);
-    }
 }

@@ -20,7 +20,10 @@
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
+<!--            <th colspan="5" style="text-align: center;">Projects</th>-->
             <th>Projects</th>
+            <th colspan="5" style="text-align: center;">Employees</th>
+<!--            <th>Locations</th>-->
         </tr>
         </thead>
         <tbody>
@@ -30,6 +33,8 @@
             <td th:text="${aManager.email}"></td>
             <td th:each = "project : ${aManager.projects}"
                 th:text="${project.name}"></td>
+            <td th:each = "employee : ${aManager.employees}"
+                th:text="${employee.firstName} + ' ' + ${employee.lastName}"></td>
 
         </tr>
         </tbody>

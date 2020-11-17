@@ -1,11 +1,9 @@
 package com.kwgdev.projectmanagement.controllers;
 
 import com.kwgdev.projectmanagement.dao.EmployeeRepository;
-import com.kwgdev.projectmanagement.dao.LocationRepository;
 import com.kwgdev.projectmanagement.dao.ManagerRepository;
 import com.kwgdev.projectmanagement.dao.ProjectRepository;
 import com.kwgdev.projectmanagement.entities.Employee;
-import com.kwgdev.projectmanagement.entities.Location;
 import com.kwgdev.projectmanagement.entities.Manager;
 import com.kwgdev.projectmanagement.entities.Project;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +29,6 @@ public class ProjectController {
     @Autowired
     ManagerRepository managerRepo;
 
-    @Autowired
-    LocationRepository locationRepo;
 
     @GetMapping
     public String displayProjects(Model model) {
@@ -49,45 +45,40 @@ public class ProjectController {
         Project aProject = new Project();
         List<Employee> employees = employeeRepo.findAll();
         List<Manager> managers = managerRepo.findAll();
-        List<Location> locations = locationRepo.findAll();
         // bind an empty Project object to the HTML form
         model.addAttribute("project", aProject);
         model.addAttribute("allEmployees", employees);
         model.addAttribute("allManagers", managers);
-        model.addAttribute("allLocations", locations);
 
         return "projects/new-project";
     }
 
     @PostMapping("/save")
-    public String createProject(Project project, @RequestParam List<Long> employees,
-                                @RequestParam Manager manager, @RequestParam Location location,
-                                Model model) {
+    public String createProject(Project project, Model model) {
         // this will handle saving the new project to the database
     projectRepo.save(project);
-
-
-
-    Iterable<Employee> projectEmployees = employeeRepo.findAllById(employees);
-
-    for(Employee employee : projectEmployees) {
-        employee.setProject(project);
-        employee.setLocation(location);
-        employeeRepo.save(employee);
-    }
-
-    manager.addProject(project);
-    manager.addLocation(location);
-    managerRepo.save(manager);
-
-    location.addProject(project);
-    location.addManager(manager);
-    locationRepo.save(location);
 
     // use a redirect to new to prevent duplicate submissions
         // always use redirect after saving data
     return "redirect:/projects";
     }
 
+
+//    // Function to remove duplicates from an ArrayList
+//    public static <T> ArrayList<T> removeDuplicates(ArrayList<T> list) {
+//
+//        // Create a new ArrayList
+//        ArrayList<T> newList = new ArrayList<T>();
+//        // Traverse through the first list
+//        for (T element : list) {
+//            // If this element is not present in newList
+//            // then add it
+//            if (!newList.contains(element)) {
+//                newList.add(element);
+//            }
+//        }
+//        // return the new list
+//        return newList;
+//    }
 
 }
