@@ -1,3 +1,5 @@
+// Project Pie Chart
+
 let chartDataString = decodeHtml(chartData);
 let chartJsonArray = JSON.parse(chartDataString);
 
@@ -27,9 +29,88 @@ new Chart(document.getElementById("myPieChart"), {
 
     //configuration options go here
     options: {
+        responsive: true,
         title: {
             display: true,
             text: 'Project Status'
+        }
+    }
+});
+
+// Employee Pie CHart
+
+let employeeChartDataString = decodeHtml(employeeChartData);
+let employeeChartJsonArray = JSON.parse(employeeChartDataString);
+
+let empArrayLength = employeeChartJsonArray.length;
+let empNumericData = [];
+let empLabelData = [];
+
+for(let i=0; i<empArrayLength; i++) {
+    // populate data arrays for our JSChart to read from the Json Strings of returned database query data
+    empNumericData[i] = employeeChartJsonArray[i].value;
+    empLabelData[i] = employeeChartJsonArray[i].label;
+}
+
+// pie chart at www.chartjs.org
+new Chart(document.getElementById("employeePieChart"), {
+    type: 'pie',
+    // data from our dataset
+    data: {
+        labels: empLabelData,
+        datasets: [{
+            label: 'My First Dataset',
+            backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f"],
+            borderColor: 'whitesmoke',
+            data: empNumericData
+        }]
+    },
+
+    //configuration options go here
+    options: {
+        responsive: true,
+        title: {
+            display: true,
+            text: 'Employee Status'
+        }
+    }
+});
+
+// Manager Pie Chart
+
+let managerChartDataString = decodeHtml(managerChartData);
+let managerChartJsonArray = JSON.parse(managerChartDataString);
+
+let mgrArrayLength = managerChartJsonArray.length;
+let mgrNumericData = [];
+let mgrLabelData = [];
+
+for(let i=0; i<mgrArrayLength; i++) {
+    // populate data arrays for our JSChart to read from the Json Strings of returned database query data
+    mgrNumericData[i] = managerChartJsonArray[i].value;
+    mgrLabelData[i] = managerChartJsonArray[i].label;
+}
+
+// pie chart at www.chartjs.org
+new Chart(document.getElementById("managerPieChart"), {
+    type: 'pie',
+    // data from our dataset
+    data: {
+        labels: mgrLabelData,
+        datasets: [{
+            label: 'My First Dataset',
+            backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f"],
+            borderColor: 'whitesmoke',
+            data: mgrNumericData
+        }]
+    },
+
+    //configuration options go here
+    options: {
+        responsive: true,
+        title: {
+            display: true,
+            text: 'Manager Status'
         }
     }
 });
