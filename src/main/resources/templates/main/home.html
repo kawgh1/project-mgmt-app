@@ -33,9 +33,14 @@
                 </tbody>
             </table>
         </div>
-        <!--pie chart-->
+        <!-- javascript pie chart-->
         <div class="col-md-4">
             <canvas id="myPieChart" height="100" width="100"></canvas>
+
+            <!-- chart data script using thymeleaf convention, see myChart.js file line 1-->
+            <script>
+                let chartData = "[[${projectStatusCount}]]"
+            </script>
         </div>
     </div>
     </div>

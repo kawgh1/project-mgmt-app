@@ -8,6 +8,8 @@ import java.util.Set;
 public class Manager {
 
     @Id
+    // AUTO lets SQL Database handle Primary Key's,
+    // IDENTITY lets Hibernate manage (good with pre filled table data)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long managerId;
 

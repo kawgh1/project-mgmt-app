@@ -22,6 +22,7 @@
             <th style="text-align: center;">Description</th>
             <th style="text-align: center;">Project Manager</th>
             <th style="text-align: center;">Location</th>
+            <th colspan="5" style="text-align: center;">Employees</th>
 
         </tr>
         </thead>
@@ -33,6 +34,8 @@
                 <td th:each="manager : ${aProject.managers}"
                     th:text="${manager.firstName} + ' ' + ${manager.lastName} ?: 'None'"></td>
                 <td th:text="${aProject.location} ?: 'None'"></td>
+                <td th:each="employee : ${aProject.employees}"
+                th:text="${employee.firstName} + ' ' + ${employee.lastName} ?: 'None'"></td>
 
 
             </tr>

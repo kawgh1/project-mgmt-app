@@ -26,7 +26,7 @@
             <input type="text" placeholder="Location" th:field="${project.location}">
 
 
-            <select th:field="${project.manager}">
+            <select th:field="${project.managers}">
                 <option th:each = "manager : ${allManagers}"
                         th:value = "${manager.managerId}"
                         th:text = "${manager.firstName} + ' ' +${manager.lastName}">
