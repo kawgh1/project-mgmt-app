@@ -8,7 +8,7 @@
 <nav th:replace="layouts :: navbar"></nav>
 
 <div class="container">
-    <h3>Employees Directory</h3>
+    <h3>Employee Directory</h3>
     <hr>
 
     <!--    Add new Employee Button -->
@@ -22,6 +22,7 @@
             <th>Email</th>
             <th>Position</th>
             <th>Manager</th>
+            <th>Action</th>
 <!--            <th>Project</th>-->
         </tr>
         </thead>
@@ -32,6 +33,15 @@
             <td th:text="${aEmployee.email}"></td>
             <td th:text="${aEmployee.position}"></td>
             <td th:text="${aEmployee.manager.firstName} + ' ' + ${aEmployee.manager.lastName}"></td>
+            <td><a th:href="@{/employees/update(empId=${aEmployee.employeeId})}"
+                   class="btn btn-info btn-sm">Update</a>
+                <a th:href="@{/employees/delete(empId=${aEmployee.employeeId})}"
+                   class="btn btn-danger btn-sm"
+                    onClick="if (!(confirm('Are you sure you want to delete this employee?'))) return false"
+                >Delete</a>
+
+
+            </td>
 
         </tr>
         </tbody>

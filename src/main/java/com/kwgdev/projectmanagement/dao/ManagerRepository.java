@@ -15,7 +15,7 @@ public interface ManagerRepository extends CrudRepository<Manager, Long> {
 
     @Query(nativeQuery=true, value="SELECT m.first_name as firstName, m.last_name as lastName, COUNT(pm.manager_id) as projectCount " +
             "FROM manager m left join project_manager pm ON pm.manager_id = m.manager_id GROUP BY m.first_name, m.last_name ORDER BY 3 DESC")
-    public List<ManagerProject> managerProjects();
+    public List<ManagerProject> getManagerProjects();
 
     @Query(nativeQuery = true, value="SELECT m.first_name, m.last_name as label, COUNT(pm.manager_id) as value " +
             "FROM manager m left join project_manager pm ON pm.manager_id = m.manager_id GROUP BY m.first_name, m.last_name ORDER BY 3 DESC")

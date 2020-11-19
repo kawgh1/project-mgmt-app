@@ -1,9 +1,7 @@
 package com.kwgdev.projectmanagement.controllers;
 
-import com.kwgdev.projectmanagement.dao.EmployeeRepository;
-import com.kwgdev.projectmanagement.dao.ManagerRepository;
-import com.kwgdev.projectmanagement.entities.Employee;
 import com.kwgdev.projectmanagement.entities.Manager;
+import com.kwgdev.projectmanagement.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,12 +15,15 @@ import java.util.List;
 @RequestMapping("/managers")
 public class ManagerController {
 
+//    @Autowired
+//    ManagerRepository managerRepo;
+    // abstraction layer to keep Controllers separated from Database operations
     @Autowired
-    ManagerRepository managerRepo;
+    private ManagerService managerService;
 
     @GetMapping
     public String displayManagers(Model model) {
-        List<Manager> managers = managerRepo.findAll();
+        List<Manager> managers = managerService.findAll();
         model.addAttribute("managers", managers);
         return "managers/list-managers";
 
@@ -42,7 +43,7 @@ public class ManagerController {
     @PostMapping("/save")
     public String createManager(Manager manager, Model model) {
         // this will handle saving the new employee to the database
-        managerRepo.save(manager);
+        managerService.save(manager);
 
         // use a redirect to new to prevent duplicate submissions
         // always use redirect after saving data

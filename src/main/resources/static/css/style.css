@@ -6,3 +6,8 @@ body{
 /*    height: 100px !important;*/
 /*    width: 200px !important;*/
 /*}*/
+
+/*active navs*/
+#nav ul li .active {
+    color: white;
+}

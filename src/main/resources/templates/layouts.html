@@ -9,7 +9,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
           integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" th:href="@{/css/style.css}">
+
+<!--    chart js for charts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+
     <title>Timelines | Project Management</title>
 </head>
 
@@ -24,17 +27,18 @@
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item active">
-                <a class="nav-link" th:href="@{/}">Home</a>
+<!--            #request.requestURI uses thymeleaf to show/highlight active nav link of current page-->
+            <li class="nav-item" th:classappend="${#request.requestURI == '/' ? 'active':''}">
+                <a class="nav-link" th:href="@{/}"><span>Home</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/projects}">Projects</a>
+            <li class="nav-item" th:classappend="${#request.requestURI == '/projects' ? 'active':''}">
+                <a class="nav-link" th:href="@{/projects}"><span>Projects</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/managers}">Managers</a>
+            <li class="nav-item" th:classappend="${#request.requestURI == '/managers' ? 'active':''}">
+                <a class="nav-link" th:href="@{/managers}"><span>Managers</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/employees}">Employees</a>
+            <li class="nav-item" th:classappend="${#request.requestURI == '/employees' ? 'active':''}">
+                <a class="nav-link" th:href="@{/employees}"><span>Employees</span></a>
             </li>
         </ul>
 

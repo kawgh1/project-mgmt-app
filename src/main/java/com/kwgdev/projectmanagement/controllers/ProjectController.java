@@ -1,18 +1,17 @@
 package com.kwgdev.projectmanagement.controllers;
 
-import com.kwgdev.projectmanagement.dao.EmployeeRepository;
-import com.kwgdev.projectmanagement.dao.ManagerRepository;
-import com.kwgdev.projectmanagement.dao.ProjectRepository;
 import com.kwgdev.projectmanagement.entities.Employee;
 import com.kwgdev.projectmanagement.entities.Manager;
 import com.kwgdev.projectmanagement.entities.Project;
+import com.kwgdev.projectmanagement.service.EmployeeService;
+import com.kwgdev.projectmanagement.service.ManagerService;
+import com.kwgdev.projectmanagement.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -20,19 +19,26 @@ import java.util.List;
 @RequestMapping("/projects")
 public class ProjectController {
 
+//    @Autowired
+//    ProjectRepository projectRepo;
+    // abstraction layer to keep Controllers separated from Database operations
     @Autowired
-    ProjectRepository projectRepo;
+    private ProjectService projectService;
 
+//    @Autowired
+//    EmployeeRepository employeeRepo;
     @Autowired
-    EmployeeRepository employeeRepo;
+    private EmployeeService employeeService;
 
+//    @Autowired
+//    ManagerRepository managerRepo;
     @Autowired
-    ManagerRepository managerRepo;
+    private ManagerService managerService;
 
 
     @GetMapping
     public String displayProjects(Model model) {
-        List<Project> projects = projectRepo.findAll();
+        List<Project> projects = projectService.findAll();
         model.addAttribute("projects", projects);
         return "projects/list-projects";
 
@@ -43,8 +49,8 @@ public class ProjectController {
 
 
         Project aProject = new Project();
-        List<Employee> employees = employeeRepo.findAll();
-        List<Manager> managers = managerRepo.findAll();
+        List<Employee> employees = employeeService.findAll();
+        List<Manager> managers = managerService.findAll();
         // bind an empty Project object to the HTML form
         model.addAttribute("project", aProject);
         model.addAttribute("allEmployees", employees);
@@ -56,7 +62,7 @@ public class ProjectController {
     @PostMapping("/save")
     public String createProject(Project project, Model model) {
         // this will handle saving the new project to the database
-    projectRepo.save(project);
+        projectService.save(project);
 
     // use a redirect to new to prevent duplicate submissions
         // always use redirect after saving data

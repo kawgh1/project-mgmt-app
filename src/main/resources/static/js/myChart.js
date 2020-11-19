@@ -71,7 +71,7 @@ new Chart(document.getElementById("employeePieChart"), {
         responsive: true,
         title: {
             display: true,
-            text: 'Employee Status'
+            text: 'Projects per Employee'
         }
     }
 });
@@ -110,7 +110,7 @@ new Chart(document.getElementById("managerPieChart"), {
         responsive: true,
         title: {
             display: true,
-            text: 'Manager Status'
+            text: 'Projects per Manager'
         }
     }
 });

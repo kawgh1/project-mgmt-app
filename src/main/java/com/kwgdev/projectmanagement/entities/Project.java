@@ -18,6 +18,8 @@ public class Project {
 
     private String description;
 
+    private int budget;
+
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH},
     fetch = FetchType.LAZY)
     @JoinTable(name = "project_employee",
