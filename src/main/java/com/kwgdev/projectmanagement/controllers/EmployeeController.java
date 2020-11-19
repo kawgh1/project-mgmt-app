@@ -50,10 +50,11 @@ public class EmployeeController {
         return "employees/new-employee";
     }
 
-    @PostMapping("/save")
-    public String createEmployee(@Valid Employee employee, Errors errors, @RequestParam Manager manager ) {
+    @PostMapping("/save-new")
+    public String createEmployee(@Valid Employee employee, Errors errors, @RequestParam Manager manager, Model model ) {
 
-
+        List<Manager> managers = managerService.findAll();
+        model.addAttribute("allManagers", managers);
         // validation
         if(errors.hasErrors()) {
             return "employees/new-employee";
@@ -83,6 +84,28 @@ public class EmployeeController {
         model.addAttribute("allManagers", managers);
 
         return "employees/update-employee";
+    }
+
+    @PostMapping("/save-update")
+    public String updateEmployee(@Valid Employee employee, Errors errors, @RequestParam Manager manager, Model model ) {
+
+        List<Manager> managers = managerService.findAll();
+        model.addAttribute("allManagers", managers);
+        // validation
+        if(errors.hasErrors()) {
+            return "employees/update-employee";
+        }
+
+
+        // this will handle saving the new employee to the database
+        employeeService.save(employee);
+
+        manager.addEmployee(employee);
+        managerService.save(manager);
+
+        // use a redirect to new to prevent duplicate submissions
+        // always use redirect after saving data
+        return "redirect:/employees";
     }
 
     @GetMapping("/delete")

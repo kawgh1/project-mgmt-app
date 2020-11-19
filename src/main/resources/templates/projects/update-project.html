@@ -10,7 +10,7 @@
 <nav th:replace="layouts :: navbar"></nav>
 
 <div class="container">
-    <form th:object="${project}" th:action="@{/projects/save}" method="POST">
+    <form th:object="${project}" th:action="@{/projects/save-update}" method="POST">
 
         <!--        this hidden projectId is used to bind to the project that was clicked on for update DB operations-->
         <input type="hidden" th:field="${project.projectId}"/>
@@ -19,6 +19,8 @@
         <label>Project Name</label>
         <div class="form-group row" style="padding-left: 20px;">
             <input class="form-control" type="text" th:field="${project.name}">
+            <span th:if="${#fields.hasErrors('name')}"
+                  th:errors="${project.name}"></span>
         </div>
 
         <label>Project Status</label>
@@ -34,11 +36,15 @@
         <div class="form-group row" style="padding-left: 20px;">
             <textarea class="form-control" type="text"
                       th:field="${project.description}"></textarea>
+            <span th:if="${#fields.hasErrors('description')}"
+                  th:errors="${project.description}"></span>
         </div>
 
         <label>Project Location</label>
         <div class="form-group row" style="padding-left: 20px;">
             <input class="form-control" type="text" th:field="${project.location}">
+            <span th:if="${#fields.hasErrors('location')}"
+                  th:errors="${project.location}"></span>
         </div>
 
         <label>Project Manager</label>

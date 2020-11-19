@@ -9,6 +9,7 @@ import com.kwgdev.projectmanagement.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,8 +62,12 @@ public class ProjectController {
         return "projects/new-project";
     }
 
-    @PostMapping("/save")
-    public String createProject(@Valid Project project, Model model) {
+    @PostMapping("/save-new")
+    public String createProject(@Valid Project project, Errors errors, Model model) {
+
+        if (errors.hasErrors()) {
+            return "projects/new-project";
+        }
         // this will handle saving the new project to the database
         projectService.save(project);
 
@@ -87,6 +92,20 @@ public class ProjectController {
         model.addAttribute("allEmployees", employees);
 
         return "projects/update-project";
+    }
+
+    @PostMapping("/save-update")
+    public String updateProject(@Valid Project project, Errors errors, Model model) {
+
+        if (errors.hasErrors()) {
+            return "projects/new-project";
+        }
+        // this will handle saving the new project to the database
+        projectService.save(project);
+
+        // use a redirect to new to prevent duplicate submissions
+        // always use redirect after saving data
+        return "redirect:/projects";
     }
 
     @GetMapping("/delete")

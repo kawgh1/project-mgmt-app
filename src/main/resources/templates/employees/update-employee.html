@@ -10,7 +10,7 @@
 <nav th:replace="layouts :: navbar"></nav>
 
 <div class="container">
-    <form th:object="${employee}" th:action="@{/employees/save}" method="POST">
+    <form th:object="${employee}" th:action="@{/employees/save-update}" method="POST">
 
 <!--        this hidden employeeId is used to bind to the employee that was clicked on for update DB operations-->
         <input type="hidden" th:field="${employee.employeeId}"/>
@@ -19,21 +19,29 @@
         <label>First Name</label>
         <div class="form-group row" style="padding-left: 20px;">
             <input class="form-control" type="text" th:field="${employee.firstName}">
+            <span th:if="${#fields.hasErrors('firstName')}"
+                  th:errors="${employee.firstName}"></span>
         </div>
 
         <label>Last Name</label>
         <div class="form-group row" style="padding-left: 20px;">
             <input class="form-control" type="text" th:field="${employee.lastName}">
+            <span th:if="${#fields.hasErrors('lastName')}"
+                  th:errors="${employee.lastName}"></span>
         </div>
 
         <label>Email Address</label>
         <div class="form-group row" style="padding-left: 20px;">
             <input class="form-control" type="text" th:field="${employee.email}">
+            <span th:if="${#fields.hasErrors('email')}"
+                  th:errors="${employee.email}"></span>
         </div>
 
         <label>Position</label>
         <div class="form-group row" style="padding-left: 20px;">
             <input class="form-control" type="text" th:field="${employee.position}">
+            <span th:if="${#fields.hasErrors('position')}"
+                  th:errors="${employee.position}"></span>
         </div>
 
         <label>Manager</label>

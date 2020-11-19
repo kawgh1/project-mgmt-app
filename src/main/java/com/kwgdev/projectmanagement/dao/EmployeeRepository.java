@@ -27,4 +27,5 @@ public interface EmployeeRepository extends CrudRepository<Employee, Long> {
     public Employee findByEmployeeId(long theEmpId);
 
     Employee findByEmail(String value);
+
 }

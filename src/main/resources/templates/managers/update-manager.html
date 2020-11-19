@@ -10,7 +10,7 @@
 <nav th:replace="layouts :: navbar"></nav>
 
 <div class="container">
-    <form th:object="${manager}" th:action="@{/managers/save}" method="POST">
+    <form th:object="${manager}" th:action="@{/managers/save-update}" method="POST">
 
         <!--        this hidden managerId is used to bind to the manager that was clicked on for update DB operations-->
         <input type="hidden" th:field="${manager.managerId}"/>
@@ -19,16 +19,22 @@
         <label>First Name</label>
         <div class="form-group row" style="padding-left: 20px;">
             <input class="form-control" type="text"  th:field="${manager.firstName}">
+            <span th:if="${#fields.hasErrors('firstName')}"
+                  th:errors="${manager.firstName}"></span>
         </div>
 
         <label>Laste Name</label>
         <div class="form-group row" style="padding-left: 20px;">
             <input class="form-control" type="text"  th:field="${manager.lastName}">
+            <span th:if="${#fields.hasErrors('lastName')}"
+                  th:errors="${manager.lastName}"></span>
         </div>
 
         <label>Email Address</label>
         <div class="form-group row" style="padding-left: 20px;">
             <input class="form-control" type="text" th:field="${manager.email}">
+            <span th:if="${#fields.hasErrors('email')}"
+                  th:errors="${manager.email}"></span>
         </div>
 
 

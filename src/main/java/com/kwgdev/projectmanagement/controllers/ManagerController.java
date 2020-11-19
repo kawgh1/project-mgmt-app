@@ -5,6 +5,7 @@ import com.kwgdev.projectmanagement.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,8 +43,13 @@ public class ManagerController {
         return "managers/new-manager";
     }
 
-    @PostMapping("/save")
-    public String createManager(@Valid Manager manager, Model model) {
+    @PostMapping("/save-new")
+    public String createManager(@Valid Manager manager, Errors errors, Model model) {
+
+        if(errors.hasErrors()) {
+            return "managers/new-manager";
+        }
+
         // this will handle saving the new employee to the database
         managerService.save(manager);
 
@@ -60,6 +66,21 @@ public class ManagerController {
         model.addAttribute("manager", theMgr);
 
         return "managers/update-manager";
+    }
+
+    @PostMapping("/save-update")
+    public String updateManager(@Valid Manager manager, Errors errors, Model model) {
+
+        if(errors.hasErrors()) {
+            return "managers/update-manager";
+        }
+
+        // this will handle saving the new employee to the database
+        managerService.save(manager);
+
+        // use a redirect to new to prevent duplicate submissions
+        // always use redirect after saving data
+        return "redirect:/managers";
     }
 
     @GetMapping("/delete")
