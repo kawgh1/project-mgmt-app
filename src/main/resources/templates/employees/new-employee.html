@@ -18,7 +18,7 @@
         <div class="form-group row" style="padding-left: 20px;">
 
             <input class="form-control" type="text" th:field="${employee.firstName}">
-            <span th:if="${#fields.hasErrors('firstName')}"
+            <span style="color: firebrick" th:if="${#fields.hasErrors('firstName')}"
                   th:errors="${employee.firstName}"></span>
         </div>
 
@@ -26,7 +26,7 @@
         <div class="form-group row" style="padding-left: 20px;">
 
             <input class="form-control" type="text"  th:field="${employee.lastName}">
-            <span th:if="${#fields.hasErrors('lastName')}"
+            <span style="color: firebrick" th:if="${#fields.hasErrors('lastName')}"
                   th:errors="${employee.lastName}"></span>
         </div>
 
@@ -34,14 +34,14 @@
         <div class="form-group row" style="padding-left: 20px;">
 
             <input class="form-control" type="text"  th:field="${employee.email}">
-            <span th:if="${#fields.hasErrors('email')}"
+            <span style="color: firebrick" th:if="${#fields.hasErrors('email')}"
                   th:errors="${employee.email}"></span>
         </div>
 
         <label>Position</label>
         <div class="form-group row" style="padding-left: 20px;">
             <input class="form-control" type="text"  th:field="${employee.position}">
-            <span th:if="${#fields.hasErrors('position')}"
+            <span style="color: firebrick" th:if="${#fields.hasErrors('position')}"
                   th:errors="${employee.position}"></span>
         </div>
 

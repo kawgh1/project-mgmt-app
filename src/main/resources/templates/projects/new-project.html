@@ -17,7 +17,7 @@
         <label>Project Name</label>
         <div class="form-group row" style="padding-left: 20px;">
             <input class="form-control" type="text" th:field="${project.name}">
-            <span th:if="${#fields.hasErrors('name')}"
+            <span style="color: firebrick" th:if="${#fields.hasErrors('name')}"
                   th:errors="${project.name}"></span>
         </div>
 
@@ -34,14 +34,14 @@
         <div class="form-group row" style="padding-left: 20px;">
             <textarea class="form-control" type="text"
                       th:field="${project.description}"></textarea>
-            <span th:if="${#fields.hasErrors('description')}"
+            <span style="color: firebrick" th:if="${#fields.hasErrors('description')}"
                   th:errors="${project.description}"></span>
         </div>
 
         <label>Project Location</label>
         <div class="form-group row" style="padding-left: 20px;">
             <input class="form-control" type="text" th:field="${project.location}">
-            <span th:if="${#fields.hasErrors('location')}"
+            <span style="color: firebrick" th:if="${#fields.hasErrors('location')}"
                   th:errors="${project.location}"></span>
         </div>
 

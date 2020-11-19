@@ -16,17 +16,17 @@ public class Project {
     // IDENTITY lets Hibernate manage (good with pre filled table data)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long projectId;
-    @NotBlank
+    @NotBlank(message="*Project name required")
     @Size(min=2, max=50)
     private String name;
-    @NotBlank
+    @NotBlank(message="*Project location required")
     @Size(min=2, max=50)
     private String location;
 
-    @NotBlank
+    @NotBlank(message="*Project stage required")
     private String stage; // NOTSTARTED, COMPLETED, INPROGRESS
 
-    @NotBlank
+    @NotBlank(message="*Project description required")
     @Size(min=2, max=250)
     private String description;
 

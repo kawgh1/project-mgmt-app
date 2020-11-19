@@ -20,17 +20,17 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long employeeId;
 
-    @NotBlank
+    @NotBlank(message="*First name required")
     @Size(min=2, max=50)
     private String firstName;
-    @NotBlank
+    @NotBlank(message="*Last name required")
     @Size(min=2, max=50)
     private String lastName;
-    @NotBlank
+    @NotBlank(message="*Must be a valid email address")
     @Email
     @Column(unique = true, nullable = false)
     private String email;
-    @NotBlank
+    @NotBlank(message="*Position required")
     @Size(min=2, max=50)
     private String position;
 

@@ -19,14 +19,14 @@ public class Manager {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long managerId;
 
-    @NotBlank
+    @NotBlank(message="*First name required")
     @Size(min=2, max=50)
     private String firstName;
-    @NotBlank
+    @NotBlank(message="*Last name required")
     @Size(min=2, max=50)
     private String lastName;
     @NotBlank
-    @Email
+    @Email(message="*Must be a valid email address")
     @Column(unique = true, nullable = false)
     private String email;
 

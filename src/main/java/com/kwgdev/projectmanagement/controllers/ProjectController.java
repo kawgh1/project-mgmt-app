@@ -97,6 +97,15 @@ public class ProjectController {
     @PostMapping("/save-update")
     public String updateProject(@Valid Project project, Errors errors, Model model) {
 
+
+        // display all managers
+        List<Manager> managers = managerService.findAll();
+        model.addAttribute("allManagers", managers);
+
+        // display all employees
+        List<Employee> employees = employeeService.findAll();
+        model.addAttribute("allEmployees", employees);
+
         if (errors.hasErrors()) {
             return "projects/new-project";
         }
