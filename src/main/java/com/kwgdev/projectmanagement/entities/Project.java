@@ -1,6 +1,11 @@
 package com.kwgdev.projectmanagement.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 import java.util.Set;
 
@@ -11,20 +16,27 @@ public class Project {
     // IDENTITY lets Hibernate manage (good with pre filled table data)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long projectId;
+    @NotBlank
+    @Size(min=2, max=50)
     private String name;
+    @NotBlank
+    @Size(min=2, max=50)
     private String location;
 
+    @NotBlank
     private String stage; // NOTSTARTED, COMPLETED, INPROGRESS
 
+    @NotBlank
+    @Size(min=2, max=250)
     private String description;
 
-    private int budget;
 
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH},
     fetch = FetchType.LAZY)
     @JoinTable(name = "project_employee",
     joinColumns = @JoinColumn(name = "project_id"),
     inverseJoinColumns = @JoinColumn(name = "employee_id"))
+    @JsonIgnore
     private List<Employee> employees;
 
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH},
@@ -32,6 +44,7 @@ public class Project {
     @JoinTable(name = "project_manager",
             joinColumns = @JoinColumn(name = "project_id"),
             inverseJoinColumns = @JoinColumn(name = "manager_id"))
+    @JsonIgnore
     private List<Manager> managers;
 
 

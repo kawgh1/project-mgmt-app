@@ -7,11 +7,11 @@ import com.kwgdev.projectmanagement.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -51,7 +51,15 @@ public class EmployeeController {
     }
 
     @PostMapping("/save")
-    public String createEmployee(Employee employee, @RequestParam Manager manager, Model model) {
+    public String createEmployee(@Valid Employee employee, Errors errors, @RequestParam Manager manager ) {
+
+
+        // validation
+        if(errors.hasErrors()) {
+            return "employees/new-employee";
+        }
+
+
         // this will handle saving the new employee to the database
         employeeService.save(employee);
 
@@ -64,7 +72,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/update")
-    public String displayEmployeeUpdateorm(@RequestParam("empId") long theEmpId, Model model) {
+    public String displayEmployeeUpdateForm(@RequestParam("empId") long theEmpId, Model model) {
 
         // display employee
         Employee theEmp = employeeService.findByEmployeeId(theEmpId);
@@ -75,6 +83,15 @@ public class EmployeeController {
         model.addAttribute("allManagers", managers);
 
         return "employees/update-employee";
+    }
+
+    @GetMapping("/delete")
+    public String deleteEmployee(@RequestParam("empId") long theEmpId) {
+
+        Employee theEmp = employeeService.findByEmployeeId(theEmpId);
+        employeeService.delete(theEmp);
+
+        return "redirect:/employees";
     }
 
 

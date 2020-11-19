@@ -11,32 +11,49 @@
 
 <div class="container">
     <form th:object="${employee}" th:action="@{/employees/save}" method="POST">
+
 <!--        this hidden employeeId is used to bind to the employee that was clicked on for update DB operations-->
         <input type="hidden" th:field="${employee.employeeId}"/>
 
-        <input type="text" placeholder="First Name" th:field="${employee.firstName}">
+        <br><br>
+        <label>First Name</label>
+        <div class="form-group row" style="padding-left: 20px;">
+            <input class="form-control" type="text" th:field="${employee.firstName}">
+        </div>
 
-        <input type="text" placeholder="Last Name" th:field="${employee.lastName}">
+        <label>Last Name</label>
+        <div class="form-group row" style="padding-left: 20px;">
+            <input class="form-control" type="text" th:field="${employee.lastName}">
+        </div>
 
-        <input type="text" placeholder="Email" th:field="${employee.email}">
+        <label>Email Address</label>
+        <div class="form-group row" style="padding-left: 20px;">
+            <input class="form-control" type="text" th:field="${employee.email}">
+        </div>
 
-        <input type="text" placeholder="Position" th:field="${employee.position}">
+        <label>Position</label>
+        <div class="form-group row" style="padding-left: 20px;">
+            <input class="form-control" type="text" th:field="${employee.position}">
+        </div>
 
-        <select th:field="${employee.manager}">
-            <option th:each = "manager : ${allManagers}"
-                    th:value = "${manager.managerId}"
-                    th:text = "${manager.firstName} + ' ' + ${manager.lastName}">
-            </option>
-        </select>
+        <label>Manager</label>
+        <div class="form-group row" style="padding-left: 20px;">
+            <select class="form-control" th:field="${employee.manager}">
+                <option th:each = "manager : ${allManagers}"
+                        th:value = "${manager.managerId}"
+                        th:text = "${manager.firstName} + ' ' + ${manager.lastName}">
+                </option>
+            </select>
+        </div>
 
 
-        <button type="submit">Create Employee</button>
+        <button class="btn btn-info col-2" type="submit">Update Employee</button>
+        <br><br>
     </form>
 
 </div>
 
-<!-- thymeleaf fragment in layouts.html -->
-<footer th:replace="layouts :: footer"></footer>
+
 
 </body>
 

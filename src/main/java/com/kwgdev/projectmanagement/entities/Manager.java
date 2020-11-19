@@ -1,6 +1,12 @@
 package com.kwgdev.projectmanagement.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 import java.util.Set;
 
@@ -13,8 +19,15 @@ public class Manager {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long managerId;
 
+    @NotBlank
+    @Size(min=2, max=50)
     private String firstName;
+    @NotBlank
+    @Size(min=2, max=50)
     private String lastName;
+    @NotBlank
+    @Email
+    @Column(unique = true, nullable = false)
     private String email;
 
     @OneToMany(mappedBy = "manager")
@@ -25,6 +38,7 @@ public class Manager {
     @JoinTable(name = "project_manager",
             joinColumns = @JoinColumn(name = "manager_id"),
             inverseJoinColumns = @JoinColumn(name = "project_id"))
+    @JsonIgnore
     private List<Project> projects;
 
 

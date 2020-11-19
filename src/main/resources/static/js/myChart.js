@@ -21,7 +21,7 @@ new Chart(document.getElementById("myPieChart"), {
         labels: labelData,
         datasets: [{
             label: 'My First Dataset',
-            backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f"],
+            backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#546e7a", "#90a4ae", "#A1887f", "#ff8a65", "#ffb74d", "#fff176"],
             borderColor: 'whitesmoke',
             data: numericData
         }]
@@ -60,7 +60,7 @@ new Chart(document.getElementById("employeePieChart"), {
         labels: empLabelData,
         datasets: [{
             label: 'My First Dataset',
-            backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f"],
+            backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#546e7a", "#90a4ae", "#A1887f", "#ff8a65", "#ffb74d", "#fff176"],
             borderColor: 'whitesmoke',
             data: empNumericData
         }]
@@ -99,7 +99,7 @@ new Chart(document.getElementById("managerPieChart"), {
         labels: mgrLabelData,
         datasets: [{
             label: 'My First Dataset',
-            backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f"],
+            backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#546e7a", "#90a4ae", "#A1887f", "#ff8a65", "#ffb74d", "#fff176"],
             borderColor: 'whitesmoke',
             data: mgrNumericData
         }]

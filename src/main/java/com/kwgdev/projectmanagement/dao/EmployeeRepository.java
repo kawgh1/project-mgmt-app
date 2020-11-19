@@ -5,9 +5,12 @@ import com.kwgdev.projectmanagement.dto.EmployeeProject;
 import com.kwgdev.projectmanagement.entities.Employee;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.List;
 
+// this line creates a Spring Data REST API at host/api-employees
+@RepositoryRestResource(collectionResourceRel = "api-employees", path="api-employees")
 public interface EmployeeRepository extends CrudRepository<Employee, Long> {
 
     @Override
@@ -22,4 +25,6 @@ public interface EmployeeRepository extends CrudRepository<Employee, Long> {
     public List<ChartData> getEmployeeStatus();
 
     public Employee findByEmployeeId(long theEmpId);
+
+    Employee findByEmail(String value);
 }

@@ -12,26 +12,27 @@
 <div class="container">
     <form th:object="${manager}" th:action="@{/managers/save}" method="POST">
 
+        <!--        this hidden managerId is used to bind to the manager that was clicked on for update DB operations-->
+        <input type="hidden" th:field="${manager.managerId}"/>
+
         <br><br>
         <label>First Name</label>
         <div class="form-group row" style="padding-left: 20px;">
-            <input class="form-control" type="text" th:field="${manager.firstName}">
+            <input class="form-control" type="text"  th:field="${manager.firstName}">
         </div>
 
-        <label>Last Name</label>
+        <label>Laste Name</label>
         <div class="form-group row" style="padding-left: 20px;">
             <input class="form-control" type="text"  th:field="${manager.lastName}">
         </div>
 
         <label>Email Address</label>
         <div class="form-group row" style="padding-left: 20px;">
-            <input class="form-control" type="text"  th:field="${manager.email}">
+            <input class="form-control" type="text" th:field="${manager.email}">
         </div>
 
 
-
-
-        <button class="btn btn-info col-2" type="submit">Create Project Manager</button>
+        <button class="btn btn-info col-2" type="submit">Update Project Manager</button>
         <br><br>
     </form>
 

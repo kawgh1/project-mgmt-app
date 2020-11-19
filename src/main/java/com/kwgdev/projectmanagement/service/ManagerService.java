@@ -32,4 +32,9 @@ public class ManagerService {
     public List<ChartData> getManagerStatus() {
         return managerRepo.getManagerStatus();
     }
+
+    public Manager findManagerById(long theMgrId) { return managerRepo.findByManagerId(theMgrId); }
+
+    public void delete(Manager theMgr) { managerRepo.delete(theMgr);
+    }
 }

@@ -4,9 +4,12 @@ import com.kwgdev.projectmanagement.dto.ChartData;
 import com.kwgdev.projectmanagement.entities.Project;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.List;
 
+// this line creates a Spring Data REST API at host/api-projects
+@RepositoryRestResource(collectionResourceRel = "api-projects", path="api-projects")
 public interface ProjectRepository extends CrudRepository<Project, Long> {
 
     @Override
@@ -16,4 +19,5 @@ public interface ProjectRepository extends CrudRepository<Project, Long> {
     public List<ChartData> getProjectStatus();
 
 
+    Project findByProjectId(long theProId);
 }

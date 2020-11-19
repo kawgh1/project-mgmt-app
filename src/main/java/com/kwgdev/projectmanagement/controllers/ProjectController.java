@@ -12,7 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -60,13 +62,40 @@ public class ProjectController {
     }
 
     @PostMapping("/save")
-    public String createProject(Project project, Model model) {
+    public String createProject(@Valid Project project, Model model) {
         // this will handle saving the new project to the database
         projectService.save(project);
 
     // use a redirect to new to prevent duplicate submissions
         // always use redirect after saving data
     return "redirect:/projects";
+    }
+
+    @GetMapping("/update")
+    public String displayProjectUpdateForm(@RequestParam("proId") long theProId, Model model) {
+
+        // display project
+        Project thePro = projectService.findByProjectId(theProId);
+        model.addAttribute("project", thePro);
+
+        // display all managers
+        List<Manager> managers = managerService.findAll();
+        model.addAttribute("allManagers", managers);
+
+        // display all employees
+        List<Employee> employees = employeeService.findAll();
+        model.addAttribute("allEmployees", employees);
+
+        return "projects/update-project";
+    }
+
+    @GetMapping("/delete")
+    public String deleteProject(@RequestParam("proId") long theProId) {
+
+        Project thePro = projectService.findByProjectId(theProId);
+        projectService.delete(thePro);
+
+        return "redirect:/projects";
     }
 
 

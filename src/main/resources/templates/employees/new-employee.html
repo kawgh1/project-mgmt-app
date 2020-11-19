@@ -10,31 +10,58 @@
 <nav th:replace="layouts :: navbar"></nav>
 
 <div class="container">
-    <form th:object="${employee}" action="/employees/save" method="POST">
-
-        <input type="text" placeholder="First Name" th:field="${employee.firstName}">
-
-        <input type="text" placeholder="Last Name" th:field="${employee.lastName}">
-
-        <input type="text" placeholder="Email" th:field="${employee.email}">
-
-        <input type="text" placeholder="Position" th:field="${employee.position}">
-
-        <select th:field="${employee.manager}">
-            <option th:each = "manager : ${allManagers}"
-                    th:value = "${manager.managerId}"
-                    th:text = "${manager.firstName} + ' ' + ${manager.lastName}">
-            </option>
-        </select>
+    <form th:object="${employee}" th:action="@{/employees/save}" method="POST">
 
 
-        <button type="submit">Create Employee</button>
+        <br><br>
+        <label>First Name</label>
+        <div class="form-group row" style="padding-left: 20px;">
+
+            <input class="form-control" type="text" th:field="${employee.firstName}">
+            <span th:if="${#fields.hasErrors('firstName')}"
+                  th:errors="${employee.firstName}"></span>
+        </div>
+
+        <label>Last Name</label>
+        <div class="form-group row" style="padding-left: 20px;">
+
+            <input class="form-control" type="text"  th:field="${employee.lastName}">
+            <span th:if="${#fields.hasErrors('lastName')}"
+                  th:errors="${employee.lastName}"></span>
+        </div>
+
+        <label>Email Address</label>
+        <div class="form-group row" style="padding-left: 20px;">
+
+            <input class="form-control" type="text"  th:field="${employee.email}">
+            <span th:if="${#fields.hasErrors('email')}"
+                  th:errors="${employee.email}"></span>
+        </div>
+
+        <label>Position</label>
+        <div class="form-group row" style="padding-left: 20px;">
+            <input class="form-control" type="text"  th:field="${employee.position}">
+            <span th:if="${#fields.hasErrors('position')}"
+                  th:errors="${employee.position}"></span>
+        </div>
+
+        <label>Manager</label>
+        <div class="form-group row" style="padding-left: 20px;">
+
+            <select class="form-control" th:field="${employee.manager}">
+                <option th:each = "manager : ${allManagers}"
+                        th:value = "${manager.managerId}"
+                        th:text = "${manager.firstName} + ' ' + ${manager.lastName}">
+                </option>
+            </select>
+        </div>
+
+        <button class="btn btn-info col-2" type="submit">Create Employee</button>
+        <br><br>
     </form>
 
 </div>
 
-<!-- thymeleaf fragment in layouts.html -->
-<footer th:replace="layouts :: footer"></footer>
 
 </body>
 

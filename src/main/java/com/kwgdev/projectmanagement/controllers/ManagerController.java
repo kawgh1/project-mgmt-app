@@ -8,7 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -41,12 +43,31 @@ public class ManagerController {
     }
 
     @PostMapping("/save")
-    public String createManager(Manager manager, Model model) {
+    public String createManager(@Valid Manager manager, Model model) {
         // this will handle saving the new employee to the database
         managerService.save(manager);
 
         // use a redirect to new to prevent duplicate submissions
         // always use redirect after saving data
+        return "redirect:/managers";
+    }
+
+    @GetMapping("/update")
+    public String displayManagerUpdateForm(@RequestParam("mgrId") long theMgrId, Model model) {
+
+        // display manager
+        Manager theMgr = managerService.findManagerById(theMgrId);
+        model.addAttribute("manager", theMgr);
+
+        return "managers/update-manager";
+    }
+
+    @GetMapping("/delete")
+    public String deleteManager(@RequestParam("mgrId") long theMgrId) {
+
+        Manager theMgr = managerService.findManagerById(theMgrId);
+        managerService.delete(theMgr);
+
         return "redirect:/managers";
     }
 

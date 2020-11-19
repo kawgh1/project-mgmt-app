@@ -1,6 +1,13 @@
 package com.kwgdev.projectmanagement.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.kwgdev.projectmanagement.validators.UniqueValue;
+
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 
@@ -13,14 +20,24 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long employeeId;
 
+    @NotBlank
+    @Size(min=2, max=50)
     private String firstName;
+    @NotBlank
+    @Size(min=2, max=50)
     private String lastName;
+    @NotBlank
+    @Email
+    @Column(unique = true, nullable = false)
     private String email;
+    @NotBlank
+    @Size(min=2, max=50)
     private String position;
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH},
             fetch = FetchType.LAZY)
     @JoinColumn(name = "manager_id")
+    @JsonIgnore
     private Manager manager;
 
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH},
@@ -28,6 +45,7 @@ public class Employee {
     @JoinTable(name="project_employee",
             joinColumns=@JoinColumn(name = "employee_id"),
             inverseJoinColumns=@JoinColumn(name="project_id"))
+    @JsonIgnore
     private List<Project> projects;
 
 
@@ -104,6 +122,10 @@ public class Employee {
 
     public void setManager(Manager manager) {
         this.manager = manager;
+    }
+
+    public List<Project> getProjects() {
+        return projects;
     }
 
 }

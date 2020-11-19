@@ -10,10 +10,12 @@
 <nav th:replace="layouts :: navbar"></nav>
 
 <div class="container">
-    <br><br>
     <form th:object="${project}" th:action="@{/projects/save}" method="POST">
 
+        <!--        this hidden projectId is used to bind to the project that was clicked on for update DB operations-->
+        <input type="hidden" th:field="${project.projectId}"/>
 
+        <br><br>
         <label>Project Name</label>
         <div class="form-group row" style="padding-left: 20px;">
             <input class="form-control" type="text" th:field="${project.name}">
@@ -59,7 +61,7 @@
             </select>
         </div>
 
-        <button class="btn btn-info col-2" type="submit">Create Project</button>
+        <button class="btn btn-info col-2" type="submit">Update Project</button>
         <br><br>
     </form>
 

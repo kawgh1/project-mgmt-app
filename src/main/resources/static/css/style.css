@@ -11,3 +11,12 @@ body{
 #nav ul li .active {
     color: white;
 }
+
+.form-control {
+    width: 15rem;
+}
+
+/*submit button on all forms*/
+.col-2 {
+    min-width: 150px;
+}
